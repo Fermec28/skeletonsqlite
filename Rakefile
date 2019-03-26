@@ -1,0 +1,31 @@
+require 'sinatra/activerecord/rake'
+require './app'
+
+require 'active_support/core_ext'
+
+namespace :generate do
+  desc "Create an empty model in app/models, e.g., rake generate:model NAME=User"
+  task :model do
+    unless ENV.has_key?('NAME')
+      raise "Must specificy model name, e.g., rake generate:model NAME=User"
+    end
+
+    model_name     = ENV['NAME'].camelize
+    model_filename = ENV['NAME'].underscore + '.rb'
+    APP_ROOT = File.dirname(__FILE__)
+    model_path = APP_ROOT+"/models/"+model_filename
+    if File.exist?(model_path)
+      raise "ERROR: Model file '#{model_path}' already exists"
+    end
+
+    puts "Creating #{model_path}"
+    File.open(model_path, 'w+') do |f|
+      f.write(<<-EOF.strip_heredoc)
+	require_relative 'application'
+        class #{model_name} < Application
+          # Remember to create a migration!
+        end
+      EOF
+    end
+  end
+end
