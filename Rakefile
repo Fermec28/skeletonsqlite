@@ -21,10 +21,10 @@ namespace :generate do
     puts "Creating #{model_path}"
     File.open(model_path, 'w+') do |f|
       f.write(<<-EOF.strip_heredoc)
-	require_relative 'application'
-        class #{model_name} < Application
-          # Remember to create a migration!
-        end
+	
+    class #{model_name} < ActiveRecord::Base
+    # Remember to create a migration!
+    end
       EOF
     end
   end
