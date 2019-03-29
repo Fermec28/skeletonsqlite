@@ -1,12 +1,11 @@
-#Sigue las sieguientes instrucciones
 
-##Bundle install
+## Bundle install
     Instala todas las dependecias del proyecto
 
 ## Crear la base de Datos
     bundle exec rake db:create
 
-##Crear una migracion para crear una tabla user
+## Crear una migracion para crear una tabla user
 
     bundle exec rake db:create_migration NAME=create_users_table
 
@@ -23,7 +22,7 @@
             end
         end
     end
-##Crear el modelo
+## Crear el modelo
 
     bundle exec rake generate:model NAME=User"
 
@@ -32,7 +31,7 @@
 
 ## Revisar el estado de las migraciones
     bundle exec rake db:migrate:status
-##Modifica el archivo app.rb y genera las rutas del modelo
+## Modifica el archivo app.rb y genera las rutas del modelo
 
     get '/users' do
         #index
@@ -67,6 +66,15 @@
     end
 
 
-##Usear las vistas con  erb
+## Usear las vistas con  erb
 
     crea todas las vistas con extension .erb en la carpeta views
+
+## User the model
+
+    User.all 
+    User.find
+    User.find_by
+    user = User.first
+    user.update(fname: "Ferney")
+    user.destroy
